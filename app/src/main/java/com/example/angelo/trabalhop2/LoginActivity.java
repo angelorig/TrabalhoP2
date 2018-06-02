@@ -21,4 +21,9 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(),UsuarioActivity.class);
         startActivity(intent);
     }
+
+    public void entrar(View view){
+        Intent intent = new Intent(getApplicationContext(),CalendarioActivity.class);
+        startActivity(intent);
+    }
 }
