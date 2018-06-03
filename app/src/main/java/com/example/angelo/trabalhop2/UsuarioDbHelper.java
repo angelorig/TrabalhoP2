@@ -48,4 +48,29 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
         usuario.setId(id);
         return true;
     }
+
+    public ArrayList consultarUsuario(){
+    //public Usuario consultarUsuario(Usuario usuario){
+        ArrayList lista = new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + TreinoContract.UsuarioDb.TABLE_NAME, null);
+        while (cursor.moveToNext()){
+            new Usuario(cursor.getLong(cursor.getColumnIndex(TreinoContract.UsuarioDb._ID)),
+                    cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_LOGIN)),
+                    cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_NOME)),
+                    cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_SENHA)));
+        }
+        return lista;
+    }
+
+    /*public Usuario validaUsuario(Usuario usuario){
+        usuario = consultarUsuario(usuario);
+
+        if(usuario != null
+                && usuario.getLogin().equals(usuario.getLogin())
+                && usuario.getSenha().equals(usuario.getSenha())) {
+            return usuario;
+        }
+        return null;
+    }*/
 }
