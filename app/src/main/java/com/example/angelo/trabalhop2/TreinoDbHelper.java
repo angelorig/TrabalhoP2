@@ -65,5 +65,4 @@ public class TreinoDbHelper extends SQLiteOpenHelper {
         return  lista;
     }
 
-
 }

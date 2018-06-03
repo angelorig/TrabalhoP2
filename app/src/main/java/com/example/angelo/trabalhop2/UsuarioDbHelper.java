@@ -23,21 +23,14 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    /*private static final String CREATECATEGORIA = "create table " + TreinoContract.CategoriaDb.TABLE_NAME + "( "
-            + TreinoContract.CategoriaDb._ID + " integer primary key autoincrement, "
-            + TreinoContract.CategoriaDb.COLUMN_DESCRICAO + " text)";
-    private static final String DELETECATEGORIA = "drop table if exists " + TreinoContract.CategoriaDb.TABLE_NAME;*/
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATEUSUARIO);
-        //db.execSQL(CREATECATEGORIA);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(DELETEUSUARIO);
-        //db.execSQL(DELETECATEGORIA);
     }
 
     @Override
@@ -51,7 +44,7 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
         contentValues.put(TreinoContract.UsuarioDb.COLUMN_NOME, usuario.getNome());
         contentValues.put(TreinoContract.UsuarioDb.COLUMN_LOGIN, usuario.getLogin());
         contentValues.put(TreinoContract.UsuarioDb.COLUMN_SENHA, usuario.getSenha());
-        long id = db.insert(TreinoContract.TreinoDb.TABLE_NAME, null, contentValues);
+        long id = db.insert(TreinoContract.UsuarioDb.TABLE_NAME, null, contentValues);
         usuario.setId(id);
         return true;
     }

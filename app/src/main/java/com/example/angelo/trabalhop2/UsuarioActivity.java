@@ -30,14 +30,14 @@ public class UsuarioActivity extends AppCompatActivity implements View.OnClickLi
         cancelar.setOnClickListener(this);
     }
 
-    /*public void salvarUsuario(View view){
+    public void salvarUsuario(View view){
         Usuario usuario = new Usuario(nome.getText().toString(), login.getText().toString(),senha.getText().toString());
         base.salvarUsuario(usuario);
         nome.setText("");
         login.setText("");
         senha.setText("");
 
-    }*/
+    }
 
     @Override
     public void onClick(View view) {

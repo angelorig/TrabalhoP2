@@ -27,4 +27,11 @@ public class TreinoContract {
         public static final String TABLE_NAME = "categoria";
         public static final String COLUMN_DESCRICAO = "descrição";
     }
+
+    public static abstract class ChatDb implements BaseColumns {
+        public static final String TABLE_NAME = "chat";
+        public static final String COLUMN_MENSAGEM = "mensagem";
+        public static final String COLUMN_REMETENTE = "remetente";
+        public static final String COLUMN_DESTINATARIO = "destinatario";
+    }
 }
