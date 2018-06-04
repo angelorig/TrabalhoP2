@@ -64,11 +64,8 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
     }
 
     public Usuario login(String login, String senha) {
-        /* Variáveis do BD */
         SQLiteDatabase db = this.getWritableDatabase();
 
-        /* Variáveis do Método*/
-        // criando usuário com valor incorreto para erro
         Usuario usuario = new Usuario(-1L, "erro", "erro", "erro");
 
         String colunas[] = {TreinoContract.UsuarioDb._ID, TreinoContract.UsuarioDb.COLUMN_NOME,
@@ -76,7 +73,6 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
         String selecao = TreinoContract.UsuarioDb.COLUMN_LOGIN + " =? AND " + TreinoContract.UsuarioDb.COLUMN_SENHA + " =? ";
         String valores[] = {login,senha};
 
-        /* Realizando busca no banco de dados */
         Cursor cursor =  db.query(TreinoContract.UsuarioDb.TABLE_NAME, colunas, selecao, valores,
                 null, null, null, null);
         if (cursor.moveToFirst()) {
@@ -89,11 +85,9 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
     }
 
     public Usuario nome(String login, String senha) {
-        /* Variáveis do BD */
+
         SQLiteDatabase db = this.getWritableDatabase();
 
-        /* Variáveis do Método*/
-        // criando usuário com valor incorreto para erro
         Usuario usuario = new Usuario(-1L, "erro", "erro", "erro");
 
         String colunas[] = {TreinoContract.UsuarioDb._ID, TreinoContract.UsuarioDb.COLUMN_NOME,
@@ -101,7 +95,6 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
         String selecao = TreinoContract.UsuarioDb.COLUMN_LOGIN + " =? AND " + TreinoContract.UsuarioDb.COLUMN_SENHA + " =? ";
         String valores[] = {login,senha};
 
-        /* Realizando busca no banco de dados */
         Cursor cursor =  db.query(TreinoContract.UsuarioDb.TABLE_NAME, colunas, selecao, valores,
                 null, null, null, null);
         if (cursor.moveToFirst()) {
