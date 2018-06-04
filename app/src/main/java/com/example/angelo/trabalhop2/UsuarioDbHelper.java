@@ -44,9 +44,9 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
         contentValues.put(TreinoContract.UsuarioDb.COLUMN_NOME, usuario.getNome());
         contentValues.put(TreinoContract.UsuarioDb.COLUMN_LOGIN, usuario.getLogin());
         contentValues.put(TreinoContract.UsuarioDb.COLUMN_SENHA, usuario.getSenha());
-        long id = db.insert(TreinoContract.UsuarioDb.TABLE_NAME, null, contentValues);
-        usuario.setId(id);
-        return true;
+        Long l = db.insert(TreinoContract.UsuarioDb.TABLE_NAME, null, contentValues);
+
+        return (l != -1L);
     }
 
     public ArrayList consultarUsuario(){
@@ -61,6 +61,56 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_SENHA)));
         }
         return lista;
+    }
+
+    public Usuario login(String login, String senha) {
+        /* Variáveis do BD */
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        /* Variáveis do Método*/
+        // criando usuário com valor incorreto para erro
+        Usuario usuario = new Usuario(-1L, "erro", "erro", "erro");
+
+        String colunas[] = {TreinoContract.UsuarioDb._ID, TreinoContract.UsuarioDb.COLUMN_NOME,
+                TreinoContract.UsuarioDb.COLUMN_LOGIN, TreinoContract.UsuarioDb.COLUMN_SENHA};
+        String selecao = TreinoContract.UsuarioDb.COLUMN_LOGIN + " =? AND " + TreinoContract.UsuarioDb.COLUMN_SENHA + " =? ";
+        String valores[] = {login,senha};
+
+        /* Realizando busca no banco de dados */
+        Cursor cursor =  db.query(TreinoContract.UsuarioDb.TABLE_NAME, colunas, selecao, valores,
+                null, null, null, null);
+        if (cursor.moveToFirst()) {
+            usuario.setId(cursor.getLong(cursor.getColumnIndex(TreinoContract.UsuarioDb._ID)));
+            usuario.setNome(cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_NOME)));
+            usuario.setLogin(cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_LOGIN)));
+            usuario.setNome(cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_SENHA)));
+        }
+        return usuario;
+    }
+
+    public Usuario nome(String login, String senha) {
+        /* Variáveis do BD */
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        /* Variáveis do Método*/
+        // criando usuário com valor incorreto para erro
+        Usuario usuario = new Usuario(-1L, "erro", "erro", "erro");
+
+        String colunas[] = {TreinoContract.UsuarioDb._ID, TreinoContract.UsuarioDb.COLUMN_NOME,
+                TreinoContract.UsuarioDb.COLUMN_LOGIN, TreinoContract.UsuarioDb.COLUMN_SENHA};
+        String selecao = TreinoContract.UsuarioDb.COLUMN_LOGIN + " =? AND " + TreinoContract.UsuarioDb.COLUMN_SENHA + " =? ";
+        String valores[] = {login,senha};
+
+        /* Realizando busca no banco de dados */
+        Cursor cursor =  db.query(TreinoContract.UsuarioDb.TABLE_NAME, colunas, selecao, valores,
+                null, null, null, null);
+        if (cursor.moveToFirst()) {
+            usuario.setId(cursor.getLong(cursor.getColumnIndex(TreinoContract.UsuarioDb._ID)));
+            usuario.setNome(cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_NOME)));
+            usuario.setLogin(cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_LOGIN)));
+            usuario.setNome(cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_SENHA)));
+        }
+        return usuario;
     }
 
     /*public Usuario validaUsuario(Usuario usuario){

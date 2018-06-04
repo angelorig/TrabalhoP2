@@ -56,8 +56,8 @@ public class ChatDbHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext()){
             lista.add(new Chat(cursor.getLong(cursor.getColumnIndex(TreinoContract.ChatDb._ID)),
                     cursor.getString(cursor.getColumnIndex(TreinoContract.ChatDb.COLUMN_MENSAGEM)),
-                    cursor.getInt(cursor.getColumnIndex(TreinoContract.ChatDb.COLUMN_DESTINATARIO))),
-                    cursor.getInt(cursor.getColumnIndex(TreinoContract.ChatDb.COLUMN_REMETENTE))));
+                    cursor.getLong(cursor.getColumnIndex(TreinoContract.ChatDb.COLUMN_DESTINATARIO))),
+                    cursor.getLong(cursor.getColumnIndex(TreinoContract.ChatDb.COLUMN_REMETENTE))));
         }
         return  lista;
     }*/
