@@ -33,7 +33,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     public void salvarTreino(View view){
-        Treino treino = new Treino(exercicio.getText().toString(), Integer.parseInt(repeticao.getText().toString()),Integer.parseInt(carga.getText().toString()), Integer.parseInt(intervalo.getText().toString()));
+        Treino treino = new Treino(exercicio.getText().toString(), Integer.parseInt(repeticao.getText().toString()),Integer.parseInt(carga.getText().toString()),
+                Integer.parseInt(intervalo.getText().toString()));
         base.salvarTreino(treino);
         exercicio.setText("");
         repeticao.setText("");
@@ -44,7 +45,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         if (view.getId()==salvar.getId()){
-            Treino treino = new Treino(exercicio.getText().toString(), Integer.parseInt(repeticao.getText().toString()),Integer.parseInt(carga.getText().toString()), Integer.parseInt(intervalo.getText().toString()));
+            Treino treino = new Treino(exercicio.getText().toString(), Integer.parseInt(repeticao.getText().toString()),Integer.parseInt(carga.getText().toString()),
+                    Integer.parseInt(intervalo.getText().toString()));
             base.salvarTreino(treino);
             exercicio.setText("");
             repeticao.setText("");

@@ -83,8 +83,7 @@ public class CalendarioActivity extends AppCompatActivity  {
 
     public void visualizarTreino(View view){
         ListView lista = (ListView) findViewById(R.id.ltvListaTreino);
-        ArrayAdapter<Treino> arrayAd = new ArrayAdapter<Treino>(getApplicationContext(),
-                android.R.layout.simple_list_item_1, base.consultarTreino());
+        ArrayAdapter<Treino> arrayAd = new ArrayAdapter<Treino>(getApplicationContext(), android.R.layout.simple_list_item_1, base.consultarTreino());
         lista.setAdapter(arrayAd);
     }
 

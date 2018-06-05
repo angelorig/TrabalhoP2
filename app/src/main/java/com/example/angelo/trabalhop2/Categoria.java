@@ -19,4 +19,9 @@ public class Categoria {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public Categoria(long id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
 }
