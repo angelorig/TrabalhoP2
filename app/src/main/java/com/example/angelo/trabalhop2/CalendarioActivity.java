@@ -23,8 +23,7 @@ public class CalendarioActivity extends AppCompatActivity  {
     private CalendarView calendario;
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
-
-
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +37,7 @@ public class CalendarioActivity extends AppCompatActivity  {
         intervalo = (EditText)findViewById(R.id.edIntervalo);
 
         CalendarView calendario;
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
         calendario = (CalendarView)findViewById(R.id.calendarView);
         calendario.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -64,6 +64,8 @@ public class CalendarioActivity extends AppCompatActivity  {
                             bundle.putInt("dia", dia);
                             bundle.putInt("mes", mes);
                             bundle.putInt("ano", ano);
+                            bundle.putSerializable("usuario",usuario);
+
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }if (which==1){
@@ -81,7 +83,8 @@ public class CalendarioActivity extends AppCompatActivity  {
 
     public void visualizarTreino(View view){
         ListView lista = (ListView) findViewById(R.id.ltvListaTreino);
-        ArrayAdapter<Treino> arrayAd = new ArrayAdapter<Treino>(getApplicationContext(), android.R.layout.simple_list_item_1, base.consultarTreino());
+        ArrayAdapter<Treino> arrayAd = new ArrayAdapter<Treino>(getApplicationContext(),
+                android.R.layout.simple_list_item_1, base.consultarTreino());
         lista.setAdapter(arrayAd);
     }
 

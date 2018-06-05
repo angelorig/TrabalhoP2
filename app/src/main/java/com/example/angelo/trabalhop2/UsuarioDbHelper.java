@@ -70,7 +70,8 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
 
         String colunas[] = {TreinoContract.UsuarioDb._ID, TreinoContract.UsuarioDb.COLUMN_NOME,
                 TreinoContract.UsuarioDb.COLUMN_LOGIN, TreinoContract.UsuarioDb.COLUMN_SENHA};
-        String selecao = TreinoContract.UsuarioDb.COLUMN_LOGIN + " =? AND " + TreinoContract.UsuarioDb.COLUMN_SENHA + " =? ";
+        String selecao = TreinoContract.UsuarioDb.COLUMN_LOGIN + " =? AND "
+                + TreinoContract.UsuarioDb.COLUMN_SENHA + " =? ";
         String valores[] = {login,senha};
 
         Cursor cursor =  db.query(TreinoContract.UsuarioDb.TABLE_NAME, colunas, selecao, valores,
@@ -92,7 +93,8 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
 
         String colunas[] = {TreinoContract.UsuarioDb._ID, TreinoContract.UsuarioDb.COLUMN_NOME,
                 TreinoContract.UsuarioDb.COLUMN_LOGIN, TreinoContract.UsuarioDb.COLUMN_SENHA};
-        String selecao = TreinoContract.UsuarioDb.COLUMN_LOGIN + " =? AND " + TreinoContract.UsuarioDb.COLUMN_SENHA + " =? ";
+        String selecao = TreinoContract.UsuarioDb.COLUMN_LOGIN + " =? AND "
+                + TreinoContract.UsuarioDb.COLUMN_SENHA + " =? ";
         String valores[] = {login,senha};
 
         Cursor cursor =  db.query(TreinoContract.UsuarioDb.TABLE_NAME, colunas, selecao, valores,
@@ -101,7 +103,7 @@ public class UsuarioDbHelper extends SQLiteOpenHelper {
             usuario.setId(cursor.getLong(cursor.getColumnIndex(TreinoContract.UsuarioDb._ID)));
             usuario.setNome(cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_NOME)));
             usuario.setLogin(cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_LOGIN)));
-            usuario.setNome(cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_SENHA)));
+            usuario.setSenha(cursor.getString(cursor.getColumnIndex(TreinoContract.UsuarioDb.COLUMN_SENHA)));
         }
         return usuario;
     }

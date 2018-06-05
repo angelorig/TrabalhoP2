@@ -1,6 +1,8 @@
 package com.example.angelo.trabalhop2;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
     private long id;
     private String nome, login, senha;
     //private Categoria categoria;

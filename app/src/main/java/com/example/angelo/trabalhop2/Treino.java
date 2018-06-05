@@ -5,6 +5,7 @@ public class Treino {
     private long id;
     private String exercico;
     private int repeticao, carga, intervalo;
+    private Usuario usuario;
 
     public Treino(long id, String exercico, int repeticao, int carga, int intervalo) {
         this.id = id;
@@ -12,6 +13,7 @@ public class Treino {
         this.repeticao = repeticao;
         this.carga = carga;
         this.intervalo = intervalo;
+
     }
 
     public Treino(String exercico, int repeticao, int carga, int intervalo) {
@@ -59,6 +61,14 @@ public class Treino {
 
     public void setIntervalo(int intervalo) {
         this.intervalo = intervalo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

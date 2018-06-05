@@ -17,7 +17,8 @@ public class TreinoDbHelper extends SQLiteOpenHelper {
             + TreinoContract.TreinoDb.COLUMN_EXERCICIO + " text, "
             + TreinoContract.TreinoDb.COLUMN_REPETICAO + " text, "
             + TreinoContract.TreinoDb.COLUMN_CARGA + " text, "
-            + TreinoContract.TreinoDb.COLUMN_INTERVALO + " text)";
+            + TreinoContract.TreinoDb.COLUMN_INTERVALO + " text), "
+            + TreinoContract.TreinoDb.COLUMN_USUARIO + " integer)";
     private static final String DELETETREINO = "drop table if exists " + TreinoContract.TreinoDb.TABLE_NAME;
 
     public TreinoDbHelper(Context context) {
@@ -46,10 +47,12 @@ public class TreinoDbHelper extends SQLiteOpenHelper {
         contentValues.put(TreinoContract.TreinoDb.COLUMN_REPETICAO, treino.getRepeticao());
         contentValues.put(TreinoContract.TreinoDb.COLUMN_CARGA, treino.getCarga());
         contentValues.put(TreinoContract.TreinoDb.COLUMN_INTERVALO, treino.getIntervalo());
+        contentValues.put(TreinoContract.TreinoDb.COLUMN_USUARIO,treino.getUsuario().getId());
         long id = db.insert(TreinoContract.TreinoDb.TABLE_NAME, null, contentValues);
         treino.setId(id);
         return true;
     }
+
 
     public ArrayList consultarTreino(){
         ArrayList lista = new ArrayList();
@@ -64,5 +67,6 @@ public class TreinoDbHelper extends SQLiteOpenHelper {
         }
         return  lista;
     }
-
 }
+
+
