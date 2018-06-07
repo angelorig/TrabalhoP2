@@ -12,20 +12,6 @@ public class TreinoDbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Treino.db";
 
-    //criação da tabela treino
-    private static final String CREATETREINO = "create table " + TreinoContract.TreinoDb.TABLE_NAME + "( "
-            + TreinoContract.TreinoDb._ID + " integer primary key autoincrement, "
-            + TreinoContract.TreinoDb.COLUMN_EXERCICIO + " text, "
-            + TreinoContract.TreinoDb.COLUMN_REPETICAO + " text, "
-            + TreinoContract.TreinoDb.COLUMN_CARGA + " text, "
-            + TreinoContract.TreinoDb.COLUMN_INTERVALO + " text, "
-            + TreinoContract.TreinoDb.COLUMN_USUARIO + " integer)";
-    private static final String DELETETREINO = "drop table if exists " + TreinoContract.TreinoDb.TABLE_NAME;
-
-    public TreinoDbHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATETREINO);
@@ -39,7 +25,7 @@ public class TreinoDbHelper extends SQLiteOpenHelper {
         db.execSQL(DELETETREINO);
         db.execSQL(DELETEUSUARIO);
         db.execSQL(DELETECHAT);
-        db.execSQL(DELETECATEGORIA);
+//        db.execSQL(DELETECATEGORIA);
     }
 
     @Override
@@ -47,32 +33,11 @@ public class TreinoDbHelper extends SQLiteOpenHelper {
         super.onDowngrade(db, oldVersion, newVersion);
     }
 
-    public boolean salvarTreino(Treino treino){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(TreinoContract.TreinoDb.COLUMN_EXERCICIO, treino.getExercico());
-        contentValues.put(TreinoContract.TreinoDb.COLUMN_REPETICAO, treino.getRepeticao());
-        contentValues.put(TreinoContract.TreinoDb.COLUMN_CARGA, treino.getCarga());
-        contentValues.put(TreinoContract.TreinoDb.COLUMN_INTERVALO, treino.getIntervalo());
-        contentValues.put(TreinoContract.TreinoDb.COLUMN_USUARIO,treino.getUsuario().getId());
-        long id = db.insert(TreinoContract.TreinoDb.TABLE_NAME, null, contentValues);
-        treino.setId(id);
-        return true;
-    }
-
-    public ArrayList consultarTreino(){
-        ArrayList lista = new ArrayList();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from " + TreinoContract.TreinoDb.TABLE_NAME, null);
-        while (cursor.moveToNext()){
-            lista.add(new Treino(cursor.getLong(cursor.getColumnIndex(TreinoContract.TreinoDb._ID)),
-                    cursor.getString(cursor.getColumnIndex(TreinoContract.TreinoDb.COLUMN_EXERCICIO)),
-                    cursor.getInt(cursor.getColumnIndex(TreinoContract.TreinoDb.COLUMN_REPETICAO)),
-                    cursor.getInt(cursor.getColumnIndex(TreinoContract.TreinoDb.COLUMN_CARGA)),
-                    cursor.getInt(cursor.getColumnIndex(TreinoContract.TreinoDb.COLUMN_INTERVALO))));
-        }
-        return  lista;
-    }
+    //criação tabela categoria
+    private static final String CREATECATEGORIA = "create table " + TreinoContract.CategoriaDb.TABLE_NAME + "( "
+            + TreinoContract.CategoriaDb._ID + "integer primary key autoincrement, "
+            + TreinoContract.CategoriaDb.COLUMN_DESCRICAO + " text)";
+    private static final String DELETECATEGORIA = "drop table if exists " + TreinoContract.CategoriaDb.TABLE_NAME;
 
     //criação da tabela usuario
     private static final String CREATEUSUARIO = "create table " + TreinoContract.UsuarioDb.TABLE_NAME + "( "
@@ -163,6 +128,49 @@ public class TreinoDbHelper extends SQLiteOpenHelper {
         return null;
     }*/
 
+    //criação da tabela treino
+    private static final String CREATETREINO = "create table " + TreinoContract.TreinoDb.TABLE_NAME + "( "
+            + TreinoContract.TreinoDb._ID + " integer primary key autoincrement, "
+            + TreinoContract.TreinoDb.COLUMN_EXERCICIO + " text, "
+            + TreinoContract.TreinoDb.COLUMN_REPETICAO + " text, "
+            + TreinoContract.TreinoDb.COLUMN_CARGA + " text, "
+            + TreinoContract.TreinoDb.COLUMN_INTERVALO + " text, "
+            + TreinoContract.TreinoDb.COLUMN_USUARIO + " integer)";
+    private static final String DELETETREINO = "drop table if exists " + TreinoContract.TreinoDb.TABLE_NAME;
+
+    public TreinoDbHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    public boolean salvarTreino(Treino treino){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TreinoContract.TreinoDb.COLUMN_EXERCICIO, treino.getExercico());
+        contentValues.put(TreinoContract.TreinoDb.COLUMN_REPETICAO, treino.getRepeticao());
+        contentValues.put(TreinoContract.TreinoDb.COLUMN_CARGA, treino.getCarga());
+        contentValues.put(TreinoContract.TreinoDb.COLUMN_INTERVALO, treino.getIntervalo());
+        contentValues.put(TreinoContract.TreinoDb.COLUMN_USUARIO,treino.getUsuario().getId());
+        long id = db.insert(TreinoContract.TreinoDb.TABLE_NAME, null, contentValues);
+        treino.setId(id);
+        return true;
+    }
+
+    public ArrayList consultarTreino(){
+        ArrayList lista = new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + TreinoContract.TreinoDb.TABLE_NAME, null);
+        while (cursor.moveToNext()){
+            lista.add(new Treino(cursor.getLong(cursor.getColumnIndex(TreinoContract.TreinoDb._ID)),
+                    cursor.getString(cursor.getColumnIndex(TreinoContract.TreinoDb.COLUMN_EXERCICIO)),
+                    cursor.getInt(cursor.getColumnIndex(TreinoContract.TreinoDb.COLUMN_REPETICAO)),
+                    cursor.getInt(cursor.getColumnIndex(TreinoContract.TreinoDb.COLUMN_CARGA)),
+                    cursor.getInt(cursor.getColumnIndex(TreinoContract.TreinoDb.COLUMN_INTERVALO))));
+        }
+        return  lista;
+    }
+
+
+
     //criação tabela chat
     private static final String CREATECHAT = "create table " + TreinoContract.ChatDb.TABLE_NAME + "( "
             + TreinoContract.ChatDb._ID + " integer primary key autoincrement, "
@@ -175,31 +183,23 @@ public class TreinoDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(TreinoContract.ChatDb.COLUMN_MENSAGEM, chat.getMensagem());
-        contentValues.put(TreinoContract.ChatDb.COLUMN_DESTINATARIO, chat.getDestinatario().toString());
-        contentValues.put(TreinoContract.ChatDb.COLUMN_REMETENTE, chat.getRemetente().toString());
+        contentValues.put(TreinoContract.ChatDb.COLUMN_DESTINATARIO, chat.getDestinatario().getId());
+        contentValues.put(TreinoContract.ChatDb.COLUMN_REMETENTE, chat.getRemetente().getId());
         long id = db.insert(TreinoContract.ChatDb.TABLE_NAME, null, contentValues);
         chat.setId(id);
         return true;
     }
 
-    /*public ArrayList consultarChat(){
+    public ArrayList consultarChat(){
         ArrayList lista = new ArrayList();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from " + TreinoContract.ChatDb.TABLE_NAME, null);
         while (cursor.moveToNext()){
             lista.add(new Chat(cursor.getLong(cursor.getColumnIndex(TreinoContract.ChatDb._ID)),
-                    cursor.getString(cursor.getColumnIndex(TreinoContract.ChatDb.COLUMN_MENSAGEM)),
-                    cursor.getLong(cursor.getColumnIndex(TreinoContract.ChatDb.COLUMN_DESTINATARIO))),
-                    cursor.getLong(cursor.getColumnIndex(TreinoContract.ChatDb.COLUMN_REMETENTE))));
+                    cursor.getString(cursor.getColumnIndex(TreinoContract.ChatDb.COLUMN_MENSAGEM))));
         }
         return  lista;
-    }*/
-
-    //criação tabela categoria
-    private static final String CREATECATEGORIA = "create table " + TreinoContract.CategoriaDb.TABLE_NAME + "( "
-            + TreinoContract.CategoriaDb._ID + "integer primary key autoincrement, "
-            + TreinoContract.CategoriaDb.COLUMN_DESCRICAO + " text)";
-    private static final String DELETECATEGORIA = "drop table if exists " + TreinoContract.CategoriaDb.TABLE_NAME;
+    }
 
 
 }

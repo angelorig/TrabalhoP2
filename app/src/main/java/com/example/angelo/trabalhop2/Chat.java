@@ -6,18 +6,15 @@ public class Chat {
     private String mensagem;
     private Usuario remetente, destinatario;
 
-    public Chat(long id, String mensagem, Usuario remetente, Usuario destinatario) {
+    public Chat(long id, String mensagem) {
         this.id = id;
         this.mensagem = mensagem;
-        this.remetente = remetente;
-        this.destinatario = destinatario;
     }
 
-    public Chat(String mensagem, Usuario remetente, Usuario destinatario) {
+    public Chat(String mensagem) {
         this.mensagem = mensagem;
-        this.remetente = remetente;
-        this.destinatario = destinatario;
     }
+
 
     public long getId() {
         return id;
