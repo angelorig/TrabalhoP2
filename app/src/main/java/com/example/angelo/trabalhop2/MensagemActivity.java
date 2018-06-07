@@ -8,6 +8,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MensagemActivity extends AppCompatActivity {
 
     private TreinoDbHelper base;
@@ -25,8 +28,15 @@ public class MensagemActivity extends AppCompatActivity {
         base = new TreinoDbHelper(getApplicationContext());
         mensagem = (EditText)findViewById(R.id.edMensagem);
 
-        Spinner spinner = (Spinner)findViewById(R.id.spDestinatario);
-        ArrayAdapter<Usuario> arrayAd = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, base.consultarUsuario());
+        usuarioSpinner();
+
+    }
+
+    private void usuarioSpinner(){
+        spinner = (Spinner)findViewById(R.id.spDestinatario);
+        ArrayAdapter<Usuario> arrayAd = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, base.consultarUsuario());
         spinner.setAdapter(arrayAd);
     }
+
+
 }

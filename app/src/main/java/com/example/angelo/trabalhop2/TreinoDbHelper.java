@@ -31,7 +31,7 @@ public class TreinoDbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATETREINO);
         db.execSQL(CREATEUSUARIO);
         db.execSQL(CREATECHAT);
-        db.execSQL(CREATECATEGORIA);
+//        db.execSQL(CREATECATEGORIA);
     }
 
     @Override

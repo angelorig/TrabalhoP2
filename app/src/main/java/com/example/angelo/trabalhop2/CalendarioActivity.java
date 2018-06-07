@@ -1,6 +1,7 @@
 package com.example.angelo.trabalhop2;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,11 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 public class CalendarioActivity extends AppCompatActivity  {
 
@@ -24,6 +27,7 @@ public class CalendarioActivity extends AppCompatActivity  {
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
     private Usuario usuario;
+    private Button mensagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,8 @@ public class CalendarioActivity extends AppCompatActivity  {
 
         CalendarView calendario;
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+
+
 
         calendario = (CalendarView)findViewById(R.id.calendarView);
         calendario.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -79,6 +85,14 @@ public class CalendarioActivity extends AppCompatActivity  {
                 dialog.show();
             }
         });
+
+        mensagem = (Button) findViewById(R.id.btMensagem);
+        mensagem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enviarMensagem(CalendarioActivity.this);
+            }
+        });
     }
 
     public void visualizarTreino(View view){
@@ -87,6 +101,20 @@ public class CalendarioActivity extends AppCompatActivity  {
         lista.setAdapter(arrayAd);
     }
 
+    private void enviarMensagem (Context context){
+        try {
+            ir_mensagem(this, usuario);
+        } catch (Exception e) {
+            Toast.makeText(context, "Erro - Não é possível enviar mensagem", Toast.LENGTH_LONG).show();
+        }
+    }
 
-
+    private void ir_mensagem(Context context, Usuario usuario){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("usuario",usuario);
+        /* iniciando nova tela*/
+        Intent iMensagem = new Intent(this, MensagemActivity.class);
+        iMensagem.putExtras(bundle);
+        startActivity(iMensagem);
+    }
 }
